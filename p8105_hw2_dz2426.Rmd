@@ -17,7 +17,8 @@ library(readxl)
 #Load in Mr.Trash Wheel dataset
 MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx") %>% 
   janitor::clean_names() %>% 
-  drop_na()
+  drop_na(dumpster) %>% 
+  select(-x15)
 
 ```
 
