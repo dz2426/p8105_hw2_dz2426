@@ -15,12 +15,12 @@ library(readxl)
 ## Problem 1
 ```{r}
 #Load in Mr.Trash Wheel dataset
-MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx") %>% 
+MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 1) %>%
   janitor::clean_names() %>% 
-  drop_na(dumpster) %>% 
-  select(-x15) %>% 
+  drop_na(dumpster) %>%  #remove NA 
+  select(-x15) %>%     #remove the last column with notes
   mutate(
-  sports_balls = round(sports_balls, digits = 0) %>% 
+  sports_balls = round(sports_balls, digits = 0) %>% #round to nearest integer
   as.integer()
   )
 
