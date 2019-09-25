@@ -18,7 +18,12 @@ library(readxl)
 MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx") %>% 
   janitor::clean_names() %>% 
   drop_na(dumpster) %>% 
-  select(-x15)
+  select(-x15) %>% 
+  mutate(
+  sports_balls = round(sports_balls, digits = 0) %>% 
+  as.integer()
+  )
+
 
 ```
 
