@@ -13,7 +13,8 @@ library(readxl)
 ```
 
 ## Problem 1
-```{r}
+# Section 1.1
+```{r eval = FALSE}
 #Load in Mr.Trash Wheel dataset
 MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 1) %>%
   janitor::clean_names() %>% 
@@ -21,9 +22,27 @@ MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", shee
   select(-x15) %>%     #remove the last column with notes
   mutate(
   sports_balls = round(sports_balls, digits = 0) %>% #round to nearest integer
-  as.integer()
+  as.integer()    #change type from double to integer
   )
 
 
+```
+# Section 1.2
+```{r}
+# Load in and clean Precipitation 2017 and 2018 dataset
+Precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 4, skip = 1) %>% 
+  janitor::clean_names() %>% 
+  drop_na(month) %>% 
+  mutate(
+    year = 2017
+  )
+  
+Precip_2018 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 3, skip = 1) %>% 
+  janitor::clean_names() %>% 
+  drop_na(total, month) %>%
+  mutate(
+    year = 2018
+  )
+  
 ```
 
