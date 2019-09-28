@@ -13,7 +13,7 @@ library(readxl)
 ```
 
 ## Problem 1
-# Section 1.1
+# Section 1.1 Clean dataset "Mr.Trash Wheel"
 ```{r message = FALSE}
 # Load in Mr.Trash Wheel dataset
 MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 1) %>%
@@ -25,7 +25,7 @@ MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", shee
       as.integer()    #change type from double to integer
   )
 ```
-# Section 1.2
+# Section 1.2 Clean datasets "2017 & 2018 Precipitation"
 ```{r}
 # Load in and clean Precipitation 2017 dataset
 Precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 4, skip = 1) %>% 
@@ -64,19 +64,34 @@ The total precipitation in 2018 was `r sum(pull(Precip_2018, total))` inches. <b
 The median number of sports balls in a dumpster in 2017 was `r median(pull(MTW_data, sports_balls)[pull(MTW_data,year) == 2017])`.
 
 ## Problem 2
+# Section 2.1 Clean dataset "pols_month.csv"
 ```{r message = FALSE}
 # Load in pols_month.csv
-pols_month = read_csv("./data/pols-month.csv") %>% 
+pols_data = read_csv("./data/pols-month.csv") %>% 
   janitor::clean_names() %>% 
   separate(col = mon, into = c("year", "month", "day")) %>% 
   mutate(
     month = as.double(month),
-    month = as.character(month.abb[month]),
+    month = as.character(month.abb[month]), #change to month_name
     president = ifelse(prez_gop == TRUE, "republican", "democratic")
-  ) %>% 
+  ) %>% #use logical statement to combine "rep" and "dem"
   select(-c(day, prez_gop, prez_dem)) #drop three volumns
 
 
 ```
 
+# Section 2.2 Clean dataset "snp.csv"
+```{r message = FALSE}
+snp_data = read_csv("./data/snp.csv") %>% 
+  janitor::clean_names() %>% 
+  separate(col = date, into = c("month", "day", "year")) %>% 
+  select(-day) %>% 
+  mutate(
+    month = as.double(month),
+    month = as.character(month.abb[month]) #change to month name
+  ) %>% 
+  select(year, month, close) #put year and month as leading columns
+
+  
+```
 
