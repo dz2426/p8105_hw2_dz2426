@@ -64,17 +64,18 @@ The total precipitation in 2018 was `r sum(pull(Precip_2018, total))` inches. <b
 The median number of sports balls in a dumpster in 2017 was `r median(pull(MTW_data, sports_balls)[pull(MTW_data,year) == 2017])`.
 
 ## Problem 2
-```{r}
+```{r message = FALSE}
 # Load in pols_month.csv
 pols_month = read_csv("./data/pols-month.csv") %>% 
   janitor::clean_names() %>% 
   separate(col = mon, into = c("year", "month", "day")) %>% 
   mutate(
-  month = as.double(month),
-  month = as.character(month.abb[month]),
-  president = ifelse(prez_gop == TRUE, "republican", "democratic")
-  )
- #select(-day)
+    month = as.double(month),
+    month = as.character(month.abb[month]),
+    president = ifelse(prez_gop == TRUE, "republican", "democratic")
+  ) %>% 
+  select(-c(day, prez_gop, prez_dem)) #drop three volumns
+
 
 ```
 
