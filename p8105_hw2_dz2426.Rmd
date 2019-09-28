@@ -21,8 +21,8 @@ MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", shee
   drop_na(dumpster) %>%  #remove NA 
   select(-x15) %>%     #remove the last column with notes
   mutate(
-  sports_balls = round(sports_balls, digits = 0) %>% #round to nearest integer
-  as.integer()    #change type from double to integer
+    sports_balls = round(sports_balls, digits = 0) %>% #round to nearest integer
+      as.integer()    #change type from double to integer
   )
 ```
 # Section 1.2
@@ -34,7 +34,7 @@ Precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", s
   mutate(
     year = 2017       #add variabel year
   )
-  
+
 # Load in and clean Precipitation 2018 dataset
 Precip_2018 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 3, skip = 1) %>% 
   janitor::clean_names() %>% 
@@ -42,7 +42,7 @@ Precip_2018 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", s
   mutate(
     year = 2018         
   )
-  
+
 # Combine two datasets
 Combine_ds = 
   bind_rows(Precip_2017, Precip_2018) %>% 
@@ -63,5 +63,17 @@ The combined precipitation data (Combine_ds) includes `r dim(Combine_ds)[1]` obs
 The total precipitation in 2018 was `r sum(pull(Precip_2018, total))` inches. <br />
 The median number of sports balls in a dumpster in 2017 was `r median(pull(MTW_data, sports_balls)[pull(MTW_data,year) == 2017])`.
 
+## Problem 2
+```{r}
+# Load in pols_month.csv
+pols_month = read_csv("./data/pols-month.csv") %>% 
+  janitor::clean_names() %>% 
+  separate(col = mon, into = c("year", "month", "day")) %>% 
+  mutate(
+  month = as.double(month),
+  month = as.character(month.abb[month])
+  )
+
+```
 
 
