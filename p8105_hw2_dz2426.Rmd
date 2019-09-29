@@ -74,6 +74,8 @@ pols_data = read_csv("./data/pols-month.csv") %>%
   mutate(
     month = as.double(month),
     month = as.character(month.abb[month]), #change to month_name
+    prez_gop = replace(prez_gop, prez_gop == 2, 1), 
+    #recode prez_grop data entry as "1" from 1974/08/15 to 1974/12/15
     president = ifelse(prez_gop == TRUE, "republican", "democratic")
   ) %>% #use logical statement to combine "rep" and "dem"
   select(-c(day, prez_gop, prez_dem)) #drop three volumns
