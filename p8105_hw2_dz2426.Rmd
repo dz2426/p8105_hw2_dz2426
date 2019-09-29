@@ -137,7 +137,7 @@ Comment 2:
 "final_merged" dataset contains `r dim(final_merged)[1]` observations and `r dim(final_merged)[2]` variables, combining the data from all three datasets above. It adds the "percentage_unemployment" and "close" variable into "pols_data" dataset, clearly displaying the trend of unemployment rate and the closing values of the S&P stock index with respect to each president's parties over time. 
 
 ## Problem 3
-# Section 3.1
+# Section 3.1 Clean dataset "Popular_Baby_Names.csv"
 ```{r message = FALSE}
 names_data = 
   read_csv("./data/Popular_Baby_Names.csv") %>% 
@@ -151,6 +151,28 @@ names_data =
     # rename to category names
   ) %>% 
   distinct() #remove duplicate rows
+```
+
+# Section 3.2 Table for popularity of the name "Olivia" over time
+```{r}
+# Filter out the baby name "OLIVIA"
+olivia_df = filter(names_data, childs_first_name == "OLIVIA", gender == "FEMALE")
+
+# Create a table with necessary varibles
+olivia_result = tibble(
+  ethnicities = c(pull(olivia_df, ethnicity)),
+  year = c(pull(olivia_df, year_of_birth)),
+  rank = c(pull(olivia_df, rank))
+)
+
+# Long-to-wide
+olivia_table = 
+  pivot_wider(
+    olivia_result,
+    names_from = year,
+    values_from = rank
+  )
+
 ```
 
 
