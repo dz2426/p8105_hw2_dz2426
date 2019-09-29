@@ -200,14 +200,13 @@ male_table =
 ```{r}
 final_df = filter(names_data, gender == "MALE", ethnicity == "WHITE NON HISPANIC", year_of_birth == "2016")
 
-scatterplot =
-  final_df %>% 
-  ggplot(aes(x = rank, y = count)) + 
+scatterplot = 
+  ggplot(final_df, aes(x = rank, y = count)) + 
   geom_point(color = 'red') +
-  xlab("Rank") +
+  xlab("Rank (1 = most popular)") + 
   ylab("Number of babies with this name")
 
-scatterplot
+print(scatterplot + ggtitle("Male, White Non-hispanic Babies Born in 2016: Count vs. Rank"))
 ```
 
 
