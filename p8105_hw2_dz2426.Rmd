@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(readxl)
+
 ```
 
 ## Problem 1
@@ -117,7 +118,7 @@ first_merged =
     #Change to the same variable type for combining with unemp_data
     month = str_to_lower(month)
     #ensure same format as in unemp_data
-)
+  )
 
 # Merge the unemp_data into the above dataset 
 final_merged = 
@@ -142,10 +143,14 @@ names_data =
   read_csv("./data/Popular_Baby_Names.csv") %>% 
   janitor::clean_names() %>% 
   mutate(
-    childs_first_name = str_to_upper(childs_first_name), 
+    childs_first_name = str_to_upper(childs_first_name),
     # change all names into uppercases
-    
-  )
+    ethnicity = recode(ethnicity, "ASIAN AND PACI" = "ASIAN AND PACIFIC ISLANDER"),
+    ethnicity = recode(ethnicity, "WHITE NON HISP" = "WHITE NON HISPANIC"),
+    ethnicity = recode(ethnicity, "BLACK NON HISP" = "BLACK NON HISPANIC")
+    # rename to category names
+  ) %>% 
+  distinct() #remove duplicate rows
 ```
 
 
