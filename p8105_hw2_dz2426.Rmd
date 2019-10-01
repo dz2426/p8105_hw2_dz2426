@@ -216,7 +216,7 @@ labs(
 )
 
 scatterplot
-ggsave("Problem2_Scatterplot.pdf", scatterplot)
+ggsave("Problem3_Scatterplot.pdf", scatterplot)
 ```
     
     
