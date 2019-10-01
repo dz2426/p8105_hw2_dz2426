@@ -206,9 +206,9 @@ scatterplot =
   ggplot(final_df, aes(x = rank, y = count)) + 
   geom_point(color = 'red', size = 1.5) +
   geom_text_repel(
-    aes(label = ifelse(rank < 11, 
+    aes(label = ifelse(rank < 6, 
                        as.character(childs_first_name),'')), size = 2) +
-  #show the top ten popular baby names
+  #show the top fie popular baby names
 labs(
   title = "Male, White Non-hispanic Babies Born in 2016: Count vs. Rank",
   x = "Rank \n(1 = most popular)" , 
