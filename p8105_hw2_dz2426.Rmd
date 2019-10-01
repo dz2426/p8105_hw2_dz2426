@@ -16,7 +16,7 @@ library(readxl)
 # Section 1.1 Clean dataset "Mr.Trash Wheel"
 ```{r message = FALSE}
 # Load in Mr.Trash Wheel dataset
-MTW_data = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 1) %>%
+MTW_data = read_excel("./data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 1) %>%
   janitor::clean_names() %>% 
   drop_na(dumpster) %>%  #remove NA 
   select(-x15) %>%     #remove the last column with notes
