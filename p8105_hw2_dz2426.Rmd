@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
 library(readxl)
+library(ggrepel)
 ```
 
 ## Problem 1
@@ -198,17 +199,25 @@ male_table =
 ```
 
 # Section 3.4 Table and graph for male, white non-hispanic children born in 2016
-```{r}
+```{r Problem_2_Scatterplot}
 final_df = filter(names_data, gender == "MALE", ethnicity == "WHITE NON HISPANIC", year_of_birth == "2016")
 
 scatterplot = 
   ggplot(final_df, aes(x = rank, y = count)) + 
-  geom_point(color = 'red') +
-  xlab("Rank \n(1 = most popular)") + 
-  ylab("Number of babies with this name")
+  geom_point(color = 'red', size = 1.5) +
+  geom_text_repel(
+    aes(label = ifelse(rank < 11, 
+                       as.character(childs_first_name),'')), size = 2) +
+  #show the top ten popular baby names
+labs(
+  title = "Male, White Non-hispanic Babies Born in 2016: Count vs. Rank",
+  x = "Rank \n(1 = most popular)" , 
+  y = "Number of babies with this name"
+)
 
-print(scatterplot + ggtitle("Male, White Non-hispanic Babies Born in 2016: Count vs. Rank"))
+scatterplot
 ```
-
-
-
+    
+    
+    
+    
