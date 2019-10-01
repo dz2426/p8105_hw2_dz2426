@@ -216,6 +216,7 @@ labs(
 )
 
 scatterplot
+ggsave("Problem2_Scatterplot.pdf", scatterplot)
 ```
     
     
