@@ -28,7 +28,7 @@ MTW_data = read_excel("./data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet 
 # Section 1.2 Clean datasets "2017 & 2018 Precipitation"
 ```{r}
 # Load in and clean Precipitation 2017 dataset
-Precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 4, skip = 1) %>% 
+Precip_2017 = read_excel("./data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 6, skip = 1) %>% 
   janitor::clean_names() %>% 
   drop_na(month) %>% 
   mutate(
@@ -36,7 +36,7 @@ Precip_2017 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", s
   )
 
 # Load in and clean Precipitation 2018 dataset
-Precip_2018 = read_excel("./data/HealthyHarborWaterWheelTotals2018-7-28.xlsx", sheet = 3, skip = 1) %>% 
+Precip_2018 = read_excel("./data/Trash-Wheel-Collection-Totals-8-6-19.xlsx", sheet = 5, skip = 1) %>% 
   janitor::clean_names() %>% 
   drop_na(total, month) %>%
   mutate(
