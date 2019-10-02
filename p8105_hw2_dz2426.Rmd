@@ -176,10 +176,14 @@ olivia_table =
   )
 
 ```
+Table 1: Popularity of the name “Olivia” as a female baby name over time
+```{r echo = FALSE}
+knitr::kable(olivia_table) #format the table reader-friendly!
+```
 
 # Section 3.3 Table for most popular male baby names
 ```{r}
-# Filter out the male baby names with 1st rank"
+# Filter out the male baby names with 1st rank
 male_df = filter(names_data, rank == 1, gender == "MALE")
 
 # Create a table with necessary varibles
@@ -190,12 +194,18 @@ male_result = tibble(
 )
 
 # Long-to-wide
-male_table = 
+male_table =
   pivot_wider(
     male_result,
     names_from = year,
     values_from = names
   )
+
+```
+
+Table 2: Most popular name among male children over time
+```{r echo = FALSE}
+knitr::kable(male_table) #format the table reader-friendly!
 ```
 
 # Section 3.4 Table and graph for male, white non-hispanic children born in 2016
@@ -208,7 +218,7 @@ scatterplot =
   geom_text_repel(
     aes(label = ifelse(rank < 6, 
                        as.character(childs_first_name),'')), size = 2) +
-  #show the top fie popular baby names
+  #show the top five popular baby names
 labs(
   title = "Male, White Non-hispanic Babies Born in 2016: Count vs. Rank",
   x = "Rank of names \n(1 = most popular)" , 
@@ -216,9 +226,13 @@ labs(
 )
 
 scatterplot
-ggsave("Problem3_Scatterplot.pdf", scatterplot)
 ```
     
+# Section 3.5 Save the scatterplot    
+```{r echo = FALSE}
+ggsave("Problem3_Scatterplot.pdf", scatterplot)
+```
+
     
     
     
